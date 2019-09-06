@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace IntentoDeTetris
@@ -167,8 +168,10 @@ namespace IntentoDeTetris
             forzarBajada = (ticksInGame % speed==0);
         }
 
-        public void ForceDown()
+
+        public List<int> ForceDown()
         {
+            List<int> LineasParaLimpiar = new List<int>();
             if (forzarBajada)
             {
                 if(this.DoesFitIn(indexCurrentPiece, indexCurrentRotation, currentX, currentY + 1))
@@ -191,7 +194,29 @@ namespace IntentoDeTetris
                         }
                     }
                     //fijarse si no hay algun tetris
-
+                    for (int y = 0; y < 4; y++)
+                    {
+                        if (currentY+y<fieldHeight-1)
+                        {
+                            bool IsALine = true;
+                            for (int x = 1; x < fieldWidth-1; x++)
+                                if (field[x,currentY+y]==' ')
+                                {
+                                    IsALine = false;
+                                    break;
+                                }
+                             
+                            //si hay una linea cmabiarla a === y despues eliminarlas xd
+                            if (IsALine)
+                            {
+                                for (int x = 1; x < fieldWidth-1; x++)
+                                {
+                                    field[x,currentY+ y] = '=';
+                                    LineasParaLimpiar.Add(y);
+                                }
+                            }
+                        }
+                    }
                     //elegir nueva pieza
                     indexCurrentPiece = random.Next(0, 7);
                     indexCurrentRotation = 0;
@@ -201,6 +226,7 @@ namespace IntentoDeTetris
                     gameOver = (!this.DoesFitIn(indexCurrentPiece, indexCurrentRotation, currentX, currentY));
                 }
             }
+                return LineasParaLimpiar;
         }
 
     }

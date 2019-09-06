@@ -25,7 +25,11 @@ namespace IntentoDeTetris
                 }
                 tetris.CheckInputs();
 
-                tetris.ForceDown();
+                if (tetris.ForceDown().Count!=0)
+                {
+
+                }
+
                 //Dibujando las cosas
                 window.Draw(tetris.field,2,2);
                 window.Draw(tetris.GetPiece(), tetris.currentX+2, tetris.currentY+2,' ');
