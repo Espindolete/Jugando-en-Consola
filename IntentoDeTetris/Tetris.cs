@@ -29,8 +29,10 @@ namespace IntentoDeTetris
         private bool forzarBajada = false;
         public bool gameOver { get; private set; }
         private List<int> LinesToClear { get; set; }
+        private int LineasLimpiadas;
 
         //extra
+        public int Score { get; private set; }
         public bool noInput{get;private set;}
         private int masBajo { get; set; }
         private int masAlto { get; set; }
@@ -55,6 +57,15 @@ namespace IntentoDeTetris
             indexCurrentPiece = 1;
             indexCurrentRotation = 0;
             gameOver = false;
+
+            LineasLimpiadas = 0;
+
+            Score = 0;
+            LinesToClear = new List<int>();
+            masBajo = 0;
+            masAlto = fieldHeight;
+            random = new Random();
+
 
             tetromino[0] =  "..X.";
             tetromino[0] += "..X.";
@@ -91,11 +102,6 @@ namespace IntentoDeTetris
             tetromino[6] += ".X..";
             tetromino[6] += "....";
 
-
-            random = new Random();
-            LinesToClear = new List<int>();
-            masBajo = 0;
-            masAlto = fieldHeight;
         }
 
         
@@ -177,7 +183,6 @@ namespace IntentoDeTetris
             forzarBajada = (ticksInGame % speed==0);
         }
 
-
         public bool extra()
         {
            
@@ -192,7 +197,13 @@ namespace IntentoDeTetris
                     {
                         field[j, xd] = ' ';
                     }
+                    LineasLimpiadas++;
+                    if (LineasLimpiadas%10==0)
+                        if (speed>=5)
+                            speed--;
                 }
+                
+                Score += ((1<<LinesToClear.Count)*10);
                 LinesToClear.Clear();
                 noInput = true;
                 return false;
@@ -260,8 +271,8 @@ namespace IntentoDeTetris
                                 for (int x = 1; x < fieldWidth-1; x++)
                                 {
                                     field[x,currentY+ y] = '=';
-                                    LinesToClear.Add(currentY+y);
                                 }
+                                LinesToClear.Add(currentY+y);
                             }
                         }
                     }

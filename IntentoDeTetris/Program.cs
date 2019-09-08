@@ -30,8 +30,11 @@ namespace IntentoDeTetris
                 }
 
                 //Dibujando las cosas
-                window.Draw(tetris.field,2,2);
-                window.Draw(tetris.GetPiece(), tetris.currentX+2, tetris.currentY+2,' ');
+                
+                window.Draw("Score", 0, 0);
+                window.Draw(tetris.Score, 7, 1);
+                window.Draw(tetris.field,10,2);
+                window.Draw(tetris.GetPiece(), tetris.currentX+10, tetris.currentY+2,' ');
 
                 window.DrawScreen();
             }

@@ -41,6 +41,20 @@ namespace IntentoDeTetris
             screenBufferArray = new char[x, y]; //main buffer array
         }
 
+        public void Draw(int text, int x, int y)//escribimos al reves los numeros porque me es mas facil xd
+        {
+            int i = x;
+            while (text != 0)
+            {
+                screenBufferArray[i--, y] = (char)((char)(text % 10)+'0');
+                text/= 10;
+            }
+            while (i >= 0)
+            {
+                screenBufferArray[i--, y] = '0';
+            }
+        }
+
         public void Draw(char[,] text, int x, int y)
         {
             int sx = text.GetLength(0);
