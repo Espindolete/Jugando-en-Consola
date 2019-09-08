@@ -27,9 +27,13 @@ namespace IntentoDeTetris
         private int ticksInGame = 0;
         private int speed = 20;
         private bool forzarBajada = false;
-        public bool gameOver{ get; private set; }
+        public bool gameOver { get; private set; }
+        private List<int> LinesToClear { get; set; }
 
         //extra
+        public bool noInput{get;private set;}
+        private int masBajo { get; set; }
+        private int masAlto { get; set; }
         Random random;
 
         public Tetris(int x, int y)
@@ -86,7 +90,12 @@ namespace IntentoDeTetris
             tetromino[6] += ".X..";
             tetromino[6] += ".X..";
             tetromino[6] += "....";
+
+
             random = new Random();
+            LinesToClear = new List<int>();
+            masBajo = 0;
+            masAlto = fieldHeight;
         }
 
         
@@ -169,9 +178,48 @@ namespace IntentoDeTetris
         }
 
 
+        public bool extra()
+        {
+           
+            if (LinesToClear.Count != 0)
+            {
+                masAlto = LinesToClear[LinesToClear.Count-1];
+                masBajo = LinesToClear[0];
+                for (int i = 0; i < LinesToClear.Count; i++)
+                {
+                    int xd=LinesToClear[i];
+                    for (int j = 1; j < fieldWidth-1; j++)
+                    {
+                        field[j, xd] = ' ';
+                    }
+                }
+                LinesToClear.Clear();
+                noInput = true;
+                return false;
+            }
+            if (noInput)
+            {
+                noInput = false ;
+                int margen= masAlto - masBajo+1;//margen entre las lineas borradas y las q tienen q bajar
+                for (int i = masAlto; i >= 0+margen; i--)
+                {
+                    for (int j = 1; j < fieldWidth-1; j++)
+                    {
+                        field[j, i] = field[j, i - margen];
+                    }
+                }
+                //cuando termina de eliminar las lineas reseteamos esto para la proxima
+                masAlto = 0;
+                masBajo = 0;
+                return false;
+            }
+
+            return true;
+        }
+
         public List<int> ForceDown()
         {
-            List<int> LineasParaLimpiar = new List<int>();
+            
             if (forzarBajada)
             {
                 if(this.DoesFitIn(indexCurrentPiece, indexCurrentRotation, currentX, currentY + 1))
@@ -212,7 +260,7 @@ namespace IntentoDeTetris
                                 for (int x = 1; x < fieldWidth-1; x++)
                                 {
                                     field[x,currentY+ y] = '=';
-                                    LineasParaLimpiar.Add(y);
+                                    LinesToClear.Add(currentY+y);
                                 }
                             }
                         }
@@ -226,7 +274,7 @@ namespace IntentoDeTetris
                     gameOver = (!this.DoesFitIn(indexCurrentPiece, indexCurrentRotation, currentX, currentY));
                 }
             }
-                return LineasParaLimpiar;
+                return LinesToClear;
         }
 
     }

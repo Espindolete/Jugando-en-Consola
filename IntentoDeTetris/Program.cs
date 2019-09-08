@@ -19,15 +19,14 @@ namespace IntentoDeTetris
                 Thread.Sleep(50);
                 tetris.GameClocking();
                 //input
-                for (int i = 0; i < 4; i++)
-                {                                  //las teclas son  //<-  ->  v   ^
-                    tetris.keys[i]=( WindowManager.GetAsyncKeyState(("\x25\x27\x28\x26"[i]))!=0);
-                }
-                tetris.CheckInputs();
-
-                if (tetris.ForceDown().Count!=0)
-                {
-
+                //chequeamos las banderas que pasan en el juego xd
+                if (tetris.extra()) { 
+                    for (int i = 0; i < 4; i++)
+                    {                                  //las teclas son  //<-  ->  v   ^
+                        tetris.keys[i]=( WindowManager.GetAsyncKeyState(("\x25\x27\x28\x26"[i]))!=0);
+                    }
+                    tetris.CheckInputs();
+                    tetris.ForceDown();
                 }
 
                 //Dibujando las cosas
