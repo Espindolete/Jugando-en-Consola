@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
-namespace IntentoDeTetris
-{
     class Tetris
     {
         //campo
@@ -289,4 +287,3 @@ namespace IntentoDeTetris
         }
 
     }
-}

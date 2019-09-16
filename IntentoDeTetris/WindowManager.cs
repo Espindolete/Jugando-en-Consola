@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 //http://cgp.wikidot.com/consle-screen-buffer
 //and edited
 
-namespace IntentoDeTetris
-{
     class WindowManager
     {
         [DllImport("user32.dll")]
@@ -127,4 +125,3 @@ namespace IntentoDeTetris
 
 
     }
-}

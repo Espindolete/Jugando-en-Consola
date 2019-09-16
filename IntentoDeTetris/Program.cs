@@ -2,8 +2,6 @@
 using System.Threading;
 
 
-namespace IntentoDeTetris
-{
     class Program
     {
         static void Main(string[] args)
@@ -41,4 +39,3 @@ namespace IntentoDeTetris
             
         }
     }
-}
