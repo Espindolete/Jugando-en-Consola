@@ -62,6 +62,11 @@ class WindowManager
         }
     }
 
+    public void Draw(char text, int x, int y)
+    {
+        screenBufferArray[(x ), (y)] = text;
+    }
+
     public void Draw(char[,] text, int x, int y)
     {
         int sx = text.GetLength(0);

@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntentoDeTetris", "IntentoDeTetris\IntentoDeTetris.csproj", "{2C9CE269-72B4-4119-B2E7-082EBA206C97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntentoDeDoom", "IntentoDeDoom\IntentoDeDoom.csproj", "{D474CC28-9326-43C3-BE58-47A957851868}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntentoDeDoom", "IntentoDeDoom\IntentoDeDoom.csproj", "{D474CC28-9326-43C3-BE58-47A957851868}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowManager", "WindowManager\WindowManager.csproj", "{5951FBC2-3772-4B03-BAEA-82C5C66BB7E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D474CC28-9326-43C3-BE58-47A957851868}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D474CC28-9326-43C3-BE58-47A957851868}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D474CC28-9326-43C3-BE58-47A957851868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5951FBC2-3772-4B03-BAEA-82C5C66BB7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5951FBC2-3772-4B03-BAEA-82C5C66BB7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5951FBC2-3772-4B03-BAEA-82C5C66BB7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5951FBC2-3772-4B03-BAEA-82C5C66BB7E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

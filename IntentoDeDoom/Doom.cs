@@ -13,7 +13,7 @@ class Doom:WindowManager
     public int mapX;
     public int mapY;
     public string[] map;
-    public float DeltaTime { get; private set; }
+    public double DeltaTime { get; private set; }
 
 
     public Doom(int x , int y):base(x,y)
@@ -54,38 +54,39 @@ class Doom:WindowManager
     public void CheckInputs()
     {
         t2 = DateTime.Now;
-
         //en vdd no se si es delta time pero ya lo saque de unity
-        DeltaTime = t2.Millisecond-t1.Millisecond;
+        DeltaTime = t2.Ticks-t1.Ticks;
+        DeltaTime /= 1000000;
         t1 = t2;
+        
         if (GetAsyncKeyState('A')!= 0)
         {
-            playerAngle -= (0.1f)/DeltaTime;
+            playerAngle -= (0.1f) * DeltaTime ;
         }
         if (GetAsyncKeyState('W') != 0)
         {
-            playerX += Math.Sin(playerAngle) / DeltaTime;
-            playerY += Math.Cos(playerAngle) / DeltaTime;
+            playerX += Math.Sin(playerAngle) * DeltaTime ;
+            playerY += Math.Cos(playerAngle) * DeltaTime ;
             if (map[(int)playerX][(int)playerY]!='.')
             {
-                playerX -= Math.Sin(playerAngle) / DeltaTime;
-                playerY -= Math.Cos(playerAngle) / DeltaTime;
+                playerX -= Math.Sin(playerAngle) * DeltaTime ;
+                playerY -= Math.Cos(playerAngle) * DeltaTime ;
             }
         }
         
         if (GetAsyncKeyState('S') != 0)
         {
-            playerX -= Math.Sin(playerAngle) / DeltaTime;
-            playerY -= Math.Cos(playerAngle) / DeltaTime;
+            playerX -= Math.Sin(playerAngle) * DeltaTime ;
+            playerY -= Math.Cos(playerAngle) * DeltaTime ;
             if (map[(int)playerX][(int)playerY] != '.')
             {
-                playerX += Math.Sin(playerAngle) / DeltaTime;
-                playerY += Math.Cos(playerAngle) / DeltaTime;
+                playerX += Math.Sin(playerAngle) * DeltaTime ;
+                playerY += Math.Cos(playerAngle) * DeltaTime ;
             }
         }
         if (GetAsyncKeyState('D') != 0)
         {
-            playerAngle += (0.1f)/DeltaTime;
+            playerAngle += (0.1f)*DeltaTime ;
         }
     }
 
@@ -114,10 +115,10 @@ class Doom:WindowManager
                 }
                 else
                 {
-                    if (map[testY][testX] == '#')
+                    if (map[testX][testY] == '#')
                     {
                         hitwall = true;
-                        //en esta parte ya no entendí nada pero traté de adaptarlo igual
+                        //i didn't understood that part that well
                         var p = new List<Tuple<double, double>>();
 
                         for (int tx = 0; tx < 2; tx++)
